@@ -1,18 +1,17 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
   const [countries, setContries] = useState([]);
 
   useEffect(() => {
-    fetch("https://xcountries-backend.azurewebsites.net/all")
-      .then((response) => response.json())
-      .then((data) => setContries(data))
-      .catch((error) =>
-        setTimeout(() => {
-          console.error("Error fetching data: ", error);
-        }, 0)
-      );
+    axios
+      .get("https://xcountries-backend.azurewebsites.net/all")
+      .then((response) => setContries(response.data))
+      .catch((error) => {
+        console.error("Error fetching data:", error.message || error);
+      });
   }, []);
 
   return (
