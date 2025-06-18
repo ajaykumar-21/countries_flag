@@ -5,7 +5,7 @@ function App() {
   const [countries, setContries] = useState([]);
 
   useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all")
+    fetch("https://xcountries-backend.azurewebsites.net/all")
       .then((response) => response.json())
       .then((data) => setContries(data))
       .catch((error) => console.error("Error fetching data: ", error));
@@ -13,14 +13,14 @@ function App() {
 
   return (
     <div className="container">
-      {countries.map((country) => (
-        <div className="cardStyles">
+      {countries.map((country, index) => (
+        <div className="cardStyles" key={index}>
           <img
-            src={country.flags.png}
-            alt={`Flag of ${country.name.common}`}
+            src={country.flag}
+            alt={`Flag of ${country.name}`}
             style={{ width: "100px", height: "100px" }}
           />
-          <h3>{country.name.common}</h3>
+          <h3>{country.name}</h3>
         </div>
       ))}
     </div>
