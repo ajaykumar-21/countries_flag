@@ -5,20 +5,10 @@ function App() {
   const [countries, setContries] = useState([]);
 
   useEffect(() => {
-    const handleLoad = () => {
-      setTimeout(() => {
-        fetch("https://xcountries-backend.azurewebsites.net/all")
-          .then((response) => response.json())
-          .then((data) => setContries(data))
-          .catch((error) => console.error("Error fetching data: ", error));
-      }, 100); // Delay slightly so Cypress can attach console.error spy
-    };
-
-    window.addEventListener("load", handleLoad);
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
+    fetch("https://xcountries-backend.azurewebsites.net/all")
+      .then((response) => response.json())
+      .then((data) => setContries(data))
+      .catch((error) => console.error("Error fetching data: ", error));
   }, []);
 
   return (
